@@ -1,0 +1,784 @@
+/* ========================================================
+   🌸 MADINA UCHUN SAYT — Tezkor & Tinchlantiruvchi Dizayn
+   (To'liq optimallashtirilgan — hech qanday qotishlarsiz)
+======================================================== */
+:root {
+  --bg-color: #faf5f5;
+  --card-bg: #ffffff;
+  --card-border: #f3e8eb;
+  --text-main: #2b2236;
+  --text-muted: #6e657c;
+  --peach: #ff7e67;
+  --rose: #f472b6;
+  --lavender: #8b5cf6;
+  --mint: #10b981;
+  --amber: #f59e0b;
+  --shadow-soft: 0 4px 20px rgba(100, 50, 75, 0.06);
+  --shadow-hover: 0 8px 25px rgba(244, 114, 182, 0.22);
+  --radius-lg: 24px;
+  --radius-md: 18px;
+  --radius-sm: 12px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Nunito', system-ui, -apple-system, sans-serif;
+  color: var(--text-main);
+  background: linear-gradient(180deg, #fdf6f7 0%, #f6eff7 50%, #f4f8f6 100%);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* Faqat qisqa lahzalik zarrachalar uchun engil kanvas */
+#fxCanvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.hidden { display: none !important; }
+
+/* Asosiy o'ram */
+.app-wrap {
+  position: relative;
+  z-index: 10;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 16px 16px 60px;
+}
+
+/* ========================================================
+   YUQORI PANEL (NAV)
+======================================================== */
+.top-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 4px 16px;
+  flex-wrap: wrap;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #ffffff;
+  padding: 7px 16px;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #554466;
+  border: 1px solid var(--card-border);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+}
+
+.status-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #10b981;
+}
+
+.nav-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.pill-btn {
+  background: #ffffff;
+  border: 1px solid var(--card-border);
+  color: var(--text-main);
+  padding: 7px 14px;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.15s, color 0.15s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+.pill-btn:hover {
+  background: #fff7f9;
+  border-color: #fbcfe8;
+}
+.pill-btn.active {
+  background: linear-gradient(135deg, var(--peach), var(--rose));
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 4px 14px rgba(244, 114, 182, 0.35);
+}
+
+/* ========================================================
+   HERO CARD
+======================================================== */
+.hero-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 32px 24px;
+  text-align: center;
+  box-shadow: var(--shadow-soft);
+  margin-bottom: 20px;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: #fdf2f8;
+  color: #db2777;
+  font-size: 13px;
+  font-weight: 800;
+  padding: 6px 16px;
+  border-radius: 30px;
+  margin-bottom: 12px;
+  border: 1px solid #fce7f3;
+}
+
+.hero-title {
+  font-family: 'Comfortaa', cursive, sans-serif;
+  font-size: clamp(23px, 5.2vw, 30px);
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--text-main);
+  margin-bottom: 12px;
+}
+
+.name-highlight {
+  color: #db2777;
+  font-weight: 800;
+}
+
+.accent-text {
+  color: #e11d48;
+  display: inline-block;
+}
+
+.hero-desc {
+  font-size: 15px;
+  color: var(--text-muted);
+  max-width: 500px;
+  margin: 0 auto 22px;
+  line-height: 1.6;
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.btn-hug {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #ff7e67, #f472b6);
+  color: #fff;
+  border: none;
+  font-family: 'Comfortaa', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 14px 30px;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(244, 114, 182, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.btn-hug:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(244, 114, 182, 0.45);
+}
+.btn-hug:active { transform: scale(0.97); }
+.hug-icon { font-size: 20px; }
+
+.hug-message {
+  margin-top: 20px;
+  padding: 18px;
+  background: #fff5f8;
+  border-radius: var(--radius-md);
+  border: 1px solid #fbcfe8;
+  text-align: center;
+}
+.hug-heart { font-size: 30px; margin-bottom: 6px; }
+.hug-text { font-size: 15px; color: #4a2842; line-height: 1.6; }
+
+/* ========================================================
+   KARTALAR STANDARTI
+======================================================== */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 24px 22px;
+  box-shadow: var(--shadow-soft);
+  margin-bottom: 20px;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.card-icon {
+  font-size: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 16px;
+  background: #fdf2f8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #fce7f3;
+  flex-shrink: 0;
+}
+
+.card-title {
+  font-family: 'Comfortaa', cursive, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.3;
+}
+
+.card-sub {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* Tugmalar */
+.btn-main {
+  font-family: 'Comfortaa', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, #ff7e67, #f472b6);
+  border: none;
+  border-radius: 40px;
+  padding: 12px 28px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(244, 114, 182, 0.3);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.btn-main:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(244, 114, 182, 0.4);
+}
+.btn-main:active { transform: scale(0.97); }
+
+.btn-secondary {
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-muted);
+  background: #ffffff;
+  border: 1px solid var(--card-border);
+  border-radius: 30px;
+  padding: 8px 18px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.btn-secondary:hover {
+  color: var(--text-main);
+  background: #fdf2f8;
+  border-color: #fbcfe8;
+}
+
+/* ========================================================
+   1. ANTISTRESS POP-IT (PUFAKCHALAR)
+======================================================== */
+.stress-bar-wrap { margin-bottom: 16px; }
+.stress-bar-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+.stress-bar {
+  width: 100%;
+  height: 12px;
+  background: #f1f3f5;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.stress-fill {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, #10b981 0%, #f59e0b 50%, #f43f5e 100%);
+  border-radius: 10px;
+  transition: width 0.25s ease;
+}
+
+.bubbles-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+  padding: 8px 2px;
+}
+
+.bubble {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, #f9a8d4, #ec4899);
+  box-shadow: 0 4px 10px rgba(236, 72, 153, 0.28);
+  transition: transform 0.1s ease, opacity 0.15s ease;
+  position: relative;
+  outline: none;
+}
+.bubble:hover { transform: scale(1.06); }
+.bubble:active { transform: scale(0.9); }
+.bubble.popped {
+  background: #ede9fe;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.08);
+  transform: scale(0.88);
+  opacity: 0.6;
+  cursor: default;
+}
+.bubble.popped::after {
+  content: '✓';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #7c3aed;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.bubble-toast {
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: #9333ea;
+  min-height: 22px;
+  margin: 12px 0 8px;
+}
+.card-footer-action { text-align: center; margin-top: 4px; }
+
+/* ========================================================
+   2. TAYMORLI NAFAS MASHQI (CALM BREATH)
+======================================================== */
+.breath-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px 0;
+  min-height: 220px;
+}
+
+.breath-circle {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: #fdf2f8;
+  border: 3px solid #fbcfe8;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 25px rgba(244, 114, 182, 0.15);
+  transition: transform 3.8s ease-in-out, background 3.8s ease-in-out;
+}
+.breath-circle.inhale {
+  transform: scale(1.35);
+  background: #ecfdf5;
+  border-color: #a7f3d0;
+}
+.breath-circle.hold {
+  transform: scale(1.35);
+  background: #fefce8;
+  border-color: #fde047;
+}
+.breath-circle.exhale {
+  transform: scale(1.0);
+  background: #f5f3ff;
+  border-color: #ddd6fe;
+}
+
+.breath-inner { text-align: center; z-index: 2; user-select: none; }
+.breath-text {
+  font-family: 'Comfortaa', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-main);
+  display: block;
+}
+.breath-timer {
+  font-size: 24px;
+  font-weight: 900;
+  color: #db2777;
+  display: block;
+  margin-top: 2px;
+}
+
+.breath-controls {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.breath-hint { font-size: 13.5px; color: var(--text-muted); max-width: 420px; }
+
+/* ========================================================
+   3. STRESSNI URISH (PUNCH THE STRESS)
+======================================================== */
+.punch-arena {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.punch-target {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  border: 4px solid #ffffff;
+  background: radial-gradient(circle at 35% 30%, #ffedd5, #fed7aa 70%, #fdba74 100%);
+  box-shadow: 0 10px 25px rgba(251, 146, 60, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.1s ease;
+  user-select: none;
+  outline: none;
+}
+.punch-target:active { transform: scale(0.88); }
+.punch-face { font-size: 60px; pointer-events: none; }
+
+.punch-pow {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+  background: #ef4444;
+  color: #fff;
+  font-family: 'Comfortaa', sans-serif;
+  font-size: 12px;
+  font-weight: 900;
+  padding: 4px 9px;
+  border-radius: 20px;
+  transform: scale(0);
+  transition: transform 0.15s ease;
+  pointer-events: none;
+}
+.punch-target.hit .punch-pow { transform: scale(1.1); }
+.punch-target.hit .punch-face { transform: scale(0.9); }
+
+.punch-info { text-align: center; }
+#punchCounter {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 4px;
+}
+.punch-reaction {
+  font-size: 14px;
+  color: #ea580c;
+  font-weight: 700;
+  min-height: 22px;
+}
+
+/* ========================================================
+   4. G'AMXO'RLIK KAFESI (CARE CAFE)
+======================================================== */
+.care-items {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.care-btn {
+  flex: 0 0 calc(33.333% - 6px);
+  min-width: 95px;
+  background: #ffffff;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 14px 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+.care-btn:hover {
+  transform: translateY(-2px);
+  border-color: #fbcfe8;
+  background: #fffdfd;
+}
+.care-btn:active { transform: scale(0.95); }
+.care-emoji { font-size: 32px; }
+.care-name { font-size: 12px; font-weight: 700; color: var(--text-main); text-align: center; }
+
+.care-plate {
+  margin-top: 14px;
+  background: #fff7ed;
+  border-radius: var(--radius-md);
+  padding: 16px;
+  text-align: center;
+  border: 1px solid #fed7aa;
+}
+.care-serving { font-size: 46px; }
+.care-msg { font-size: 14.5px; font-weight: 700; color: #9a3412; margin-top: 6px; }
+
+/* ========================================================
+   5. TABASSUM GENERATORI (QUOTES)
+======================================================== */
+.quote-box {
+  background: #fffdf7;
+  border: 1px solid #fde68a;
+  border-radius: var(--radius-md);
+  padding: 22px 20px;
+  position: relative;
+  margin-bottom: 16px;
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.quote-sparkle { position: absolute; top: -10px; left: 16px; font-size: 20px; }
+.quote-text {
+  font-family: 'Comfortaa', cursive, sans-serif;
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: #3b2034;
+  font-weight: 600;
+  transition: opacity 0.2s;
+}
+.quotes-card { text-align: center; }
+
+/* ========================================================
+   6. DILDAN MAKTUB (LETTER)
+======================================================== */
+.letter-paper {
+  background: #fffdfc;
+  border: 1px solid #ebd8d0;
+  border-radius: var(--radius-md);
+  padding: 26px 22px;
+  position: relative;
+  margin-bottom: 18px;
+  line-height: 1.75;
+  box-shadow: inset 0 0 20px rgba(250, 235, 225, 0.3);
+}
+.letter-stamp {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #fee2e2;
+  border: 2px dashed #ef4444;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+}
+.letter-salute {
+  font-family: 'Comfortaa', cursive;
+  font-size: 17px;
+  font-weight: 700;
+  color: #9f1239;
+  margin-bottom: 12px;
+}
+.letter-body {
+  font-size: 14.5px;
+  color: #3f334d;
+}
+.letter-sign {
+  margin-top: 16px;
+  font-style: italic;
+  font-weight: 700;
+  color: #be185d;
+  text-align: right;
+  font-size: 13.5px;
+}
+
+.letter-actions { text-align: center; }
+.smile-feedback {
+  margin-top: 14px;
+  padding: 12px 18px;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  border-radius: 30px;
+  color: #065f46;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+/* ========================================================
+   5. ICHINGDAGI GAPLAR (VENT SECTION)
+======================================================== */
+.vent-tags {
+  margin-bottom: 16px;
+}
+.vent-tag-title {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+.vent-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.vent-chip {
+  background: #fdf2f8;
+  border: 1px solid #fbcfe8;
+  color: #9d174d;
+  font-family: 'Nunito', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.vent-chip:hover {
+  background: #fce7f3;
+  transform: translateY(-1px);
+}
+.vent-chip:active {
+  transform: scale(0.96);
+}
+.vent-chip.selected {
+  background: linear-gradient(135deg, var(--peach), var(--rose));
+  color: #fff;
+  border-color: transparent;
+}
+
+.vent-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.vent-textarea {
+  width: 100%;
+  border: 2px solid var(--card-border);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px;
+  color: var(--text-main);
+  background: #fffdfd;
+  outline: none;
+  resize: vertical;
+  min-height: 110px;
+  line-height: 1.5;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.vent-textarea:focus {
+  border-color: #f472b6;
+  box-shadow: 0 0 0 3px rgba(244, 114, 182, 0.18);
+  background: #ffffff;
+}
+.vent-textarea::placeholder {
+  color: #a89cb3;
+  font-size: 14px;
+}
+
+.vent-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.vent-privacy {
+  font-size: 12.5px;
+  color: #8b5cf6;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.vent-success {
+  margin-top: 10px;
+  padding: 24px 20px;
+  background: linear-gradient(135deg, #fff5f8, #f0fdf4);
+  border: 1px solid #bbf7d0;
+  border-radius: var(--radius-md);
+  text-align: center;
+  animation: fadeInPop 0.3s ease;
+}
+.vent-success-icon {
+  font-size: 40px;
+  margin-bottom: 8px;
+}
+.vent-success-title {
+  font-family: 'Comfortaa', cursive, sans-serif;
+  font-size: 18px;
+  color: #065f46;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.vent-success-desc {
+  font-size: 14.5px;
+  color: #374151;
+  line-height: 1.6;
+}
+
+@keyframes fadeInPop {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* ========================================================
+   FOOTER
+======================================================== */
+.app-footer {
+  text-align: center;
+  padding: 20px 10px;
+  color: var(--text-muted);
+  font-size: 13.5px;
+}
+.footer-sub {
+  font-size: 13px;
+  color: #db2777;
+  font-weight: 700;
+  margin-top: 4px;
+}
+
+/* Kichik ekranlar (Mobil) */
+@media (max-width: 480px) {
+  .app-wrap { padding: 10px 12px 40px; }
+  .hero-card { padding: 24px 16px; }
+  .card { padding: 18px 14px; }
+  .bubbles-grid { grid-template-columns: repeat(6, 1fr); gap: 8px; }
+  .card-icon { width: 42px; height: 42px; font-size: 24px; }
+  .card-title { font-size: 16.5px; }
+  .btn-hug { padding: 12px 22px; font-size: 14.5px; }
+}
