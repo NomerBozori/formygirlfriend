@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Madina uchun maxsus burchak 🌸</title>
+  <meta name="description" content="Madinaning kayfiyatini ko'tarish uchun iliq va tinchlantiruvchi sayt" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;700&family=Nunito:wght@500;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css?v=5" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>" />
+</head>
+<body>
+  <!-- Faqat kerak bo'lganda ishlaydigan engil effekt kanvasi -->
+  <canvas id="fxCanvas"></canvas>
+
+  <div class="app-wrap">
+    <!-- Yuqori qulay vositalar paneli -->
+    <header class="top-nav">
+      <div class="status-pill">
+        <span class="status-dot"></span>
+        <span>Madinaning tinchlik zonasi 🌿</span>
+      </div>
+      <div class="nav-actions">
+        <button id="rainBtn" class="pill-btn" title="Yomg'ir ovozi">🌧️ Yomg'ir</button>
+        <button id="musicBtn" class="pill-btn" title="Lofi ohang">🎵 Musiqa</button>
+      </div>
+    </header>
+
+    <!-- Bosh sahifa: Iliq salom -->
+    <main>
+      <section class="hero-card">
+        <div class="hero-badge">🌸 Madina uchun maxsus</div>
+        <h1 class="hero-title">Kayfiyating yo'qmi, <span class="name-highlight">Madina?</span><br><span class="accent-text">Hech qisi yo'q, men borman 🤍</span></h1>
+        <p class="hero-desc">
+          Bilaman, ba'zida hamma narsa asabga tegadi, kayfiyat tushadi va hech kim bilan gaplashging kelmaydi. 
+          Bu normal holat. Bu yerda hech qanday bosim, asabiylashish va shovqin yo'q. Faqat tinchlik va mehr.
+        </p>
+        
+        <div class="hero-buttons">
+          <button id="hugBtn" class="btn-hug">
+            <span class="hug-icon">🫂</span>
+            <span class="hug-label">Virtual quchoq olish</span>
+          </button>
+        </div>
+
+        <div id="hugMessage" class="hug-message hidden">
+          <div class="hug-heart">💖</div>
+          <p class="hug-text">
+            <strong>Madina, senga katta va issiq quchoq!</strong><br>
+            Chuqur nafas ol. Nima bo'lishidan qat'i nazar, sen bilan hammasi yaxshi bo'ladi. Men doim sen tomondaman.
+          </p>
+        </div>
+      </section>
+
+      <!-- 1. Antistress Pop-it (Pufakchalarni yorish) -->
+      <section class="card antistress-card">
+        <div class="card-header">
+          <div class="card-icon">🫧</div>
+          <div>
+            <h2 class="card-title">Stressni yo'qotish (Pop-it)</h2>
+            <p class="card-sub">Pufakchalarni birma-bir bosib yor — asablarni yengillatadi</p>
+          </div>
+        </div>
+
+        <div class="stress-bar-wrap">
+          <div class="stress-bar-header">
+            <span>Stress darajasi:</span>
+            <span id="stressPercent">100%</span>
+          </div>
+          <div class="stress-bar">
+            <div id="stressFill" class="stress-fill"></div>
+          </div>
+        </div>
+
+        <div class="bubbles-grid" id="bubblesGrid"></div>
+
+        <div class="bubble-toast" id="bubbleToast">Pufakchalarni bosing...</div>
+
+        <div class="card-footer-action">
+          <button id="resetBubbles" class="btn-secondary">Pufakchalarni yangilash 🔄</button>
+        </div>
+      </section>
+
+      <!-- 2. Nafas olish mashqi (Calm Breath) -->
+      <section class="card breath-card">
+        <div class="card-header">
+          <div class="card-icon">🫁</div>
+          <div>
+            <h2 class="card-title">Tinchlantiruvchi nafas mashqi</h2>
+            <p class="card-sub">Asablar joyida bo'lmaganda 1 daqiqada yordam beradi</p>
+          </div>
+        </div>
+
+        <div class="breath-container">
+          <div class="breath-circle" id="breathCircle">
+            <div class="breath-inner">
+              <span id="breathText" class="breath-text">Tayyormisiz?</span>
+              <span id="breathTimer" class="breath-timer"></span>
+            </div>
+            <div class="breath-glow"></div>
+          </div>
+        </div>
+
+        <div class="breath-controls">
+          <button id="startBreathBtn" class="btn-main">Mashqni boshlash 🌸</button>
+          <p class="breath-hint">Doira kattalashganda nafas oling, to'xtaganda ushlang, kichrayganda chiqaring.</p>
+        </div>
+      </section>
+
+      <!-- 3. Stressni urib haydash (Punch the stress!) -->
+      <section class="card punch-card">
+        <div class="card-header">
+          <div class="card-icon">🥊</div>
+          <div>
+            <h2 class="card-title">Asabingga tekkan narsani urib hayda!</h2>
+            <p class="card-sub">Ichimdagi yomon kayfiyatni shu koptokchaga chiqarib tashla 😄</p>
+          </div>
+        </div>
+
+        <div class="punch-arena">
+          <button class="punch-target" id="punchTarget" aria-label="Urib ko'r">
+            <span class="punch-face" id="punchFace">😤</span>
+            <span class="punch-pow" id="punchPow">POW!</span>
+          </button>
+        </div>
+        <div class="punch-info">
+          <p id="punchCounter">Urishlar soni: <b>0</b> ta</p>
+          <p id="punchReaction" class="punch-reaction">Bosing, Madina! Asabingizga kim yoki nima tekkan bo'lsa urib tashlang!</p>
+        </div>
+      </section>
+
+      <!-- 4. Virtual g'amxo'rlik kafesi (Care Cafe) -->
+      <section class="card care-card">
+        <div class="card-header">
+          <div class="card-icon">☕</div>
+          <div>
+            <h2 class="card-title">Madina, senga nima keltiray?</h2>
+            <p class="card-sub">O'zingga yoqqan shirinlik yoki ichimlikni tanla — kaloriya 0% 😉</p>
+          </div>
+        </div>
+
+        <div class="care-items">
+          <button class="care-btn" data-item="boba">
+            <span class="care-emoji">🧋</span>
+            <span class="care-name">Shirin Boba Tea</span>
+          </button>
+          <button class="care-btn" data-item="cocoa">
+            <span class="care-emoji">☕</span>
+            <span class="care-name">Issiq Kakao</span>
+          </button>
+          <button class="care-btn" data-item="cake">
+            <span class="care-emoji">🍰</span>
+            <span class="care-name">Qulupnayli Desert</span>
+          </button>
+          <button class="care-btn" data-item="choco">
+            <span class="care-emoji">🍫</span>
+            <span class="care-name">Sevgi Shokoladi</span>
+          </button>
+          <button class="care-btn" data-item="bear">
+            <span class="care-emoji">🧸</span>
+            <span class="care-name">Katta Ayiqcha</span>
+          </button>
+        </div>
+
+        <div id="carePlate" class="care-plate hidden">
+          <div class="care-serving" id="careServing">🧋</div>
+          <div class="care-msg" id="careMsg">Madina, aynan sen uchun sevgi bilan tayyorlandi! ❤️</div>
+        </div>
+      </section>
+
+      <!-- 5. Ichingdagi gaplar: Nima bo'ldi, Madina? -->
+      <section class="card vent-card" id="ventSection">
+        <div class="card-header">
+          <div class="card-icon">💌</div>
+          <div>
+            <h2 class="card-title">Ichingdagi gaplar… Nima bo'ldi, Madina? 💭</h2>
+            <p class="card-sub">Ichingda saqlama, xohlagancha yoz. Buni faqat men o'qiyman 🤍</p>
+          </div>
+        </div>
+
+        <div class="vent-tags">
+          <span class="vent-tag-title">Balki shulardan biridir:</span>
+          <div class="vent-chips">
+            <button type="button" class="vent-chip" data-text="Shunchaki hamma narsadan juda charchadim… 🥺">🥺 Hammasidan charchadim</button>
+            <button type="button" class="vent-chip" data-text="Bitta odam rosa asabimga tegdi 😤">😤 Kimdir asabimga tegdi</button>
+            <button type="button" class="vent-chip" data-text="O'zim ham bilmayman, sababsiz kayfiyatim yo'q 🌧️">🌧️ Sababsiz kayfiyatim yo'q</button>
+            <button type="button" class="vent-chip" data-text="Boshim og'riyapti, ishlar va darslar juda ko'p 🤯">🤯 Boshim og'riyapti / ish ko'p</button>
+            <button type="button" class="vent-chip" data-text="Menga shunchaki biroz mehr va quchoq kerak edi 🫂">🫂 Faqat mehr va quchoq kerak</button>
+          </div>
+        </div>
+
+        <div class="vent-form" id="ventForm">
+          <textarea 
+            id="ventInput" 
+            class="vent-textarea" 
+            rows="4" 
+            placeholder="Madina, nima bezovta qilayotganini yoz… Men doim seni eshitishga va tushunishga tayyorman 🌸"
+          ></textarea>
+          
+          <div class="vent-bottom">
+            <span class="vent-privacy">🔒 To'g'ridan-to'g'ri mening Telegramimga boradi</span>
+            <button id="ventSendBtn" class="btn-main">
+              <span id="ventBtnText">Menga aytib ber 💌</span>
+            </button>
+          </div>
+        </div>
+
+        <div id="ventSuccess" class="vent-success hidden">
+          <div class="vent-success-icon">💌✨</div>
+          <h3 class="vent-success-title">Xatingni oldim, Madinam!</h3>
+          <p class="vent-success-desc">
+            Ichingdagi gaplarni bo'lishganing uchun rahmat. Hozir barchasini o'qib, senga yozaman. 
+            Sen aslo yolg'iz emassan, har doim sen tomonimdaman 🌸🤍
+          </p>
+        </div>
+      </section>
+
+      <!-- 6. Sehrli Tabassum Generator (Smile Quotes) -->
+      <section class="card quotes-card">
+        <div class="card-header">
+          <div class="card-icon">✨</div>
+          <div>
+            <h2 class="card-title">Kafolatlangan tabassum generatori</h2>
+            <p class="card-sub">Madinaning kayfiyatini ko'taradigan iliq so'zlar</p>
+          </div>
+        </div>
+
+        <div class="quote-box">
+          <div class="quote-sparkle">✨</div>
+          <p class="quote-text" id="quoteText">
+            "Madina, sen xafa bo'lib tursang ham dunyodagi eng yoqimtoy insonsan. Lekin tabassum qilsang — butun dunyo yorishib ketadi 🌸"
+          </p>
+        </div>
+
+        <button id="nextQuoteBtn" class="btn-main">
+          <span>Yana bir tabassum 💖</span>
+        </button>
+      </section>
+
+      <!-- 6. Dildan maktub (Heartfelt Letter) -->
+      <section class="card letter-card">
+        <div class="card-header">
+          <div class="card-icon">🕊️</div>
+          <div>
+            <h2 class="card-title">Madinaga kichkina xat</h2>
+            <p class="card-sub">Faqat sen uchun, butun mehrim bilan yozilgan</p>
+          </div>
+        </div>
+
+        <div class="letter-paper">
+          <div class="letter-stamp">❤️</div>
+          <p class="letter-salute">Salom, azizam Madina…</p>
+          <p class="letter-body">
+            Bilaman, bugun kayfiyating joyida emas, ichingda qandaydir og'irlik yoki asabiylik bor. 
+            Balki kimdir xafa qilgandir, balki shunchaki hammasidan charchagandirsan.<br><br>
+            Senga bitta narsani eslatmoqchiman: <b>sen har doim kuchli bo'lishga majbur emassan</b>. 
+            Ba'zida charchash, yig'lash, hech narsa qilmaslik — bu to'liq normal holat.<br><br>
+            Hamma narsani bir chetga sur, Madina. O'zingni asra. Chunki bu dunyoda sen bittasan va menga juda-juda qadrlisan. 
+            Agar gaplashging kelsa — men doim tinglayman. Agar jim turging kelsa — yoningda jim o'tiraman.<br><br>
+            Hozir esa, iltimos, o'zing uchun bittagina tabassum qil. Hammasi o'tib ketadi va yaxshi bo'ladi. 🤍
+          </p>
+          <p class="letter-sign">— Seni qadrlaydigan va doim qo'llaydigan inson</p>
+        </div>
+
+        <div class="letter-actions">
+          <button id="smileYesBtn" class="btn-main">Tabassum qildim 😊</button>
+          <p id="smileFeedback" class="smile-feedback hidden">Madina, har doim shunday kulib yur! Bu tabassum senga juda yarashadi 🌸✨</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p>Bu sahifa faqat Madinani tabassum qildirish uchun tayyorlandi ✨</p>
+      <p class="footer-sub">Madina, sen eng zo'risan! 💖</p>
+    </footer>
+  </div>
+
+  <script src="js/app.js?v=5"></script>
+</body>
+</html>
